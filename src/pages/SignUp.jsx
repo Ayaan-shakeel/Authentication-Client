@@ -1,0 +1,46 @@
+import { useState } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
+import AuthCard from "../components/AuthCard";
+import { useNavigate } from "react-router-dom";
+
+const SignUp = () => {
+  const navigate = useNavigate();
+
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const handleSignup = async () => {
+    try {
+      const res = await axios.post("http://localhost:7000/api/register", form);
+
+      toast.success(res.data.message);
+
+      navigate("/verify", { state: { email: form.email } });
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Error");
+    }
+  };
+
+  return (
+    <AuthCard>
+      <h2 className="text-2xl font-bold mb-4 text-center">Signup</h2>
+
+      <input placeholder="Name" className="input" 
+        onChange={(e) => setForm({ ...form, name: e.target.value })} />
+
+      <input placeholder="Email" className="input mt-2"
+        onChange={(e) => setForm({ ...form, email: e.target.value })} />
+
+      <input type="password" placeholder="Password" className="input mt-2"
+        onChange={(e) => setForm({ ...form, password: e.target.value })} />
+
+      <button onClick={handleSignup} className="btn mt-4">Signup</button>
+    </AuthCard>
+  );
+};
+
+export default SignUp;
