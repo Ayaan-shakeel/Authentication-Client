@@ -31,8 +31,8 @@ useEffect(() => {
     });
 
     toast.success("Verified!");
-    navigate("/main");
-    toast.success("SignUp Success")
+    navigate("/dashboard");
+    
   } catch (err) {
     toast.error("Invalid OTP");
   } finally {

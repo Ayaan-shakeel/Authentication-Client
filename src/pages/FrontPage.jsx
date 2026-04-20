@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { toast,ToastContainer } from 'react-toastify'
 const FrontPage = () => {
     const navigate=useNavigate()
+    
 
     const logOut=async(req,res)=>{
+        toast.success("Log out successfully")
 navigate("/")
-res.send("log out succesfully")
     }
   return (
      <div className="min-h-screen bg-linear-to-br from-slate-900 via-gray-800 to-slate-950 text-white px-4 sm:px-6 lg:px-8">

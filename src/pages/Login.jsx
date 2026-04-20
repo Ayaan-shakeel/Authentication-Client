@@ -25,7 +25,7 @@ const Login = () => {
     } catch (err) {
       toast.error(err.response?.data?.message);
     }
-    navigate("/main")
+    navigate("/dashboard")
   };
 const newAccount=(req,res)=>{
   navigate("/signup")
