@@ -21,8 +21,11 @@ const SignUp = () => {
   const handleSignup = async () => {
   try {
     setLoading(true);
+    
 
     const res = await axios.post("http://localhost:7000/api/register", form);
+   
+
 
     toast.success(res.data.message);
     navigate("/verify", { state: { email: form.email } });

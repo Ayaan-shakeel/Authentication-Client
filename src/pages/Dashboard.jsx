@@ -36,10 +36,10 @@ const Dashboard = () => {
   if (!user) return <div>Loading...</div>;
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-purple-200">
+    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-blue-100 to-purple-200">
       <div className="bg-white p-8 rounded-2xl shadow-xl text-center">
         <h1 className="text-2xl font-bold mb-2">
-          Welcome {user.name} 👋
+          Welcome {user.name}
         </h1>
 
         <p className="text-gray-600 mb-4">

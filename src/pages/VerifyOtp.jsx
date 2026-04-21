@@ -25,16 +25,17 @@ useEffect(() => {
   try {
     setLoading(true);
 
-    await axios.post("http://localhost:7000/api/verify-otp", {
+const res= await axios.post("http://localhost:7000/api/verify-otp", {
       email,
       otp,
     });
-
+localStorage.setItem("token", res.data.token);
     toast.success("Verified!");
     navigate("/dashboard");
     
   } catch (err) {
     toast.error("Invalid OTP");
+    console.log("error :",err)
   } finally {
     setLoading(false);
   }
