@@ -17,7 +17,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault()
     try {
-      const res = await axios.post("http://localhost:7000/api/login", form);
+      const res = await axios.post("https://authentication-server-1-oi3o.onrender.com/api/login", form);
 
       localStorage.setItem("token", res.data.token);
 
@@ -29,7 +29,7 @@ const Login = () => {
   };
 const newAccount=(req,res)=>{
   navigate("/signup")
-  res.send("create a new account")
+  
 }
   return (
     <AuthCard>

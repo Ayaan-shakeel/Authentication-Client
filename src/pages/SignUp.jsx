@@ -23,7 +23,7 @@ const SignUp = () => {
     setLoading(true);
     
 
-    const res = await axios.post("http://localhost:7000/api/register", form);
+    const res = await axios.post("https://authentication-server-1-oi3o.onrender.com/api/register", form);
    
 
 

@@ -18,7 +18,7 @@ const Dashboard = () => {
       try {
         const token = localStorage.getItem("token");
 
-        const res = await axios.get("http://localhost:7000/api/me", {
+        const res = await axios.get("https://authentication-server-1-oi3o.onrender.com/api/me", {
           headers: {
             Authorization: `Bearer ${token}`,
           },

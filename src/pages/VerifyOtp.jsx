@@ -25,7 +25,7 @@ useEffect(() => {
   try {
     setLoading(true);
 
-const res= await axios.post("http://localhost:7000/api/verify-otp", {
+const res= await axios.post("https://authentication-server-1-oi3o.onrender.com/api/verify-otp", {
       email,
       otp,
     });
@@ -42,7 +42,7 @@ localStorage.setItem("token", res.data.token);
 };
 const handleResend = async () => {
   try {
-    await axios.post("http://localhost:7000/api/resend-otp", { email });
+    await axios.post("https://authentication-server-1-oi3o.onrender.com/api/resend-otp", { email });
 
     toast.success("OTP resent");
     setTimer(30);
