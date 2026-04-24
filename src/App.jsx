@@ -10,16 +10,11 @@ import FrontPage from './pages/FrontPage';
 import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./pages/Dashboard";
 import RedirectHandler from './components/RedirectHandler';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 
 const App = () => {
-
-
-  
-
-  
-
   return (
-
     <div>
 <RedirectHandler/>
 
@@ -30,14 +25,15 @@ const App = () => {
           <Route path="/" element={<Login/>} />
           <Route path="/main" element={<FrontPage/>} />
 
-<Route
-  path="/dashboard"
-  element={
-    <ProtectedRoute>
+<Route path="/dashboard" element={
+  <ProtectedRoute>
       <Dashboard />
     </ProtectedRoute>
   }
 />
+<Route path="/forgot-password" element={<ForgotPassword />} />
+<Route path="/reset-password/:token" element={<ResetPassword />} />
+
         </Routes>
       
 

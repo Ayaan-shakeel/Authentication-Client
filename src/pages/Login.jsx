@@ -13,7 +13,6 @@ const Login = () => {
      email: "",
      password: "" 
     });
-
   const handleLogin = async (e) => {
     e.preventDefault()
     try {
@@ -30,6 +29,9 @@ const Login = () => {
 const newAccount=(req,res)=>{
   navigate("/signup")
   
+}
+const forgotPassword=(req,res)=>{
+  navigate("/forgot-password")
 }
   return (
     <AuthCard>
@@ -64,6 +66,9 @@ const newAccount=(req,res)=>{
        className="btn mt-4">
         Login
       </button>
+</div>
+<div>
+  <button onClick={forgotPassword}>Forgot Password</button>
 </div>
 <div>
   <p onClick={newAccount} className="relative mt-2 text-center text-blue-400 cursor-pointer">Create a new Account</p>

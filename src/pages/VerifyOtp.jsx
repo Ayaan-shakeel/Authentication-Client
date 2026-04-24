@@ -34,8 +34,7 @@ localStorage.setItem("token", res.data.token);
     navigate("/dashboard");
     
   } catch (err) {
-    toast.error("Invalid OTP");
-    console.log("error :",err)
+    toast.error(err.response?.data?.message || "Something went wrong");
   } finally {
     setLoading(false);
   }
