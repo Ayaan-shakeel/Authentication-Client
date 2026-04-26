@@ -4,6 +4,9 @@ import { toast } from "react-toastify";
 import AuthCard from "../components/AuthCard";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
+
 
 const Login = () => {
     
@@ -33,6 +36,18 @@ const newAccount=(req,res)=>{
 const forgotPassword=(req,res)=>{
   navigate("/forgot-password")
 }
+
+const handleGoogleLogin = async (credentialResponse) => {
+  const decoded = jwtDecode(credentialResponse.credential);
+
+  const res = await axios.post("https://authentication-server-1-oi3o.onrender.com/api/google-login", {
+    name: decoded.name,
+    email: decoded.email,
+    googleId: decoded.sub,
+  });
+
+  localStorage.setItem("token", res.data.token);
+};
   return (
     <AuthCard>
         <h2 className="text-2xl font-bold mb-4 text-center text-gray-700">
@@ -72,6 +87,12 @@ const forgotPassword=(req,res)=>{
 </div>
 <div>
   <p onClick={newAccount} className="relative mt-2 text-center text-blue-400 cursor-pointer">Create a new Account</p>
+</div>
+<div>
+  <GoogleLogin
+  onSuccess={handleGoogleLogin}
+  onError={() => console.log("Login Failed")}
+/>
 </div>
     </AuthCard>
   );
