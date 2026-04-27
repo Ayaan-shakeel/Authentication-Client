@@ -16,14 +16,12 @@ import ResetPassword from './pages/ResetPassword';
 const App = () => {
   return (
     <div>
-<RedirectHandler/>
-
-      {/* 959980577435-5gbhcm2r0na7itnvfe4rt0rl0pa1lcqj.apps.googleusercontent.com */}
         <Routes>
           <Route path="/signup" element={<SignUp/>} />
           <Route path="/verify" element={<VerifyOtp/>} />
           <Route path="/" element={<Login/>} />
           <Route path="/main" element={<FrontPage/>} />
+          <Route path="/redirect" element={<RedirectHandler/>} />
 
 <Route path="/dashboard" element={
   <ProtectedRoute>
@@ -35,12 +33,6 @@ const App = () => {
 <Route path="/reset-password/:token" element={<ResetPassword />} />
 
         </Routes>
-      
-
-
-
-
-
       <ToastContainer position="top-right" autoClose={3000} />
     </div>
   )

@@ -90,7 +90,7 @@ const Login = () => {
         </span>
       </div>
 
-      <button onClick={handleLogin} className="btn mt-4">
+      <button onClick={handleLogin} className="btn  mt-4">
         Login
       </button>
 

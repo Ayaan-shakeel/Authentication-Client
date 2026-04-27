@@ -10,7 +10,10 @@ const Dashboard = () => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     navigate("/");
-    toast.success("Logout Successfully")
+    toast.success("Logout Successfully");
+setTimeout(() => {
+  navigate("/");
+}, 500);
   };
 
   useEffect(() => {
@@ -26,35 +29,61 @@ const Dashboard = () => {
 
         setUser(res.data);
       } catch (err) {
-        console.log(err);
-      }
+  console.log(err);
+  toast.error("Session expired, please login again");
+
+  localStorage.removeItem("token");
+  navigate("/");
+}
     };
 
     fetchUser();
   }, []);
 
-  if (!user) return <div>Loading...</div>;
-
+  if (!user) {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-blue-100 to-purple-200">
-      <div className="bg-white p-8 rounded-2xl shadow-xl text-center">
-        <h1 className="text-2xl font-bold mb-2">
+    <div className="min-h-screen flex items-center justify-center">
+      <p className="text-lg font-semibold animate-pulse">
+        Loading Dashboard...
+      </p>
+    </div>
+  );
+}
+ return (
+  <div className="min-h-screen bg-gray-100">
+
+    {/* Navbar */}
+    <div className="flex justify-between items-center bg-white p-4 shadow">
+      <h1 className="text-xl font-bold">Dashboard</h1>
+
+      <button
+        onClick={handleLogout}
+        className="  bg-red-500 text-white px-4 py-2 rounded-lg"
+      >
+        Logout
+      </button>
+    </div>
+
+    {/* Content */}
+    <div className="p-6">
+      <div className="bg-white p-6 rounded-2xl shadow-md max-w-md mx-auto text-center">
+
+        <h2 className="text-2xl font-bold mb-2">
           Welcome {user.name}
-        </h1>
+        </h2>
 
         <p className="text-gray-600 mb-4">
           {user.email}
         </p>
 
-        <button
-          onClick={handleLogout}
-          className="bg-red-500 text-white px-4 py-2 rounded-lg"
-        >
-          Logout
-        </button>
+        <div className="mt-4 text-sm text-gray-500">
+          You are logged in successfully.
+        </div>
+
       </div>
     </div>
-  );
+  </div>
+);
 };
 
 export default Dashboard;

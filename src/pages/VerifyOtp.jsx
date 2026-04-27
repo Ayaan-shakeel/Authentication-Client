@@ -62,7 +62,7 @@ const handleResend = async () => {
 
       <button
   onClick={handleVerify}
-  className="btn mt-4"
+  className="btn sm:w-full mt-4"
   disabled={loading}
 >
   {loading ? "Verifying..." : "Verify"}

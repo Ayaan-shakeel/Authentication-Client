@@ -67,7 +67,7 @@ const SignUp = () => {
 </div>
 <div className="relative mt-2">
 
-      <button className="btn mt-4" onClick={handleSignup} disabled={loading}>
+      <button className="btn  mt-4" onClick={handleSignup} disabled={loading}>
   {loading ? "Creating..." : "Signup"}
 </button>
 </div>
