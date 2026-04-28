@@ -12,6 +12,9 @@ import Dashboard from "./pages/Dashboard";
 import RedirectHandler from './components/RedirectHandler';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
+import Profile from './pages/Profile';
+import SettingsPage from './pages/SettingsPage';
+import ChangePassword from './pages/ChangePassword';
 
 const App = () => {
   return (
@@ -31,6 +34,15 @@ const App = () => {
 />
 <Route path="/forgot-password" element={<ForgotPassword />} />
 <Route path="/reset-password/:token" element={<ResetPassword />} />
+<Route path="/settings" element={<SettingsPage/>} />
+<Route path="/change-password" element={<ChangePassword/>} />
+<Route
+  path="/profile" element={
+    <ProtectedRoute>
+      <Profile />
+    </ProtectedRoute>
+  }
+/>
 
         </Routes>
       <ToastContainer position="top-right" autoClose={3000} />
