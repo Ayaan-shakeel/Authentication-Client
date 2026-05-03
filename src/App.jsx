@@ -15,6 +15,7 @@ import ResetPassword from './pages/ResetPassword';
 import Profile from './pages/Profile';
 import SettingsPage from './pages/SettingsPage';
 import ChangePassword from './pages/ChangePassword';
+import DeleteAccount from './pages/DeleteAccount';
 
 const App = () => {
   return (
@@ -36,6 +37,7 @@ const App = () => {
 <Route path="/reset-password/:token" element={<ResetPassword />} />
 <Route path="/settings" element={<SettingsPage/>} />
 <Route path="/change-password" element={<ChangePassword/>} />
+<Route path="/delete-account" element={<DeleteAccount/>} />
 <Route
   path="/profile" element={
     <ProtectedRoute>

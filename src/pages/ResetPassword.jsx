@@ -10,8 +10,30 @@ const ResetPassword = () => {
 
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+const validatePassword = (password) => {
+  if (password.length < 10) return "Password must be at least 10 characters";
+
+  if (!/[A-Z]/.test(password))
+    return "At least one uppercase letter required";
+
+  if (!/[a-z]/.test(password))
+    return "At least one lowercase letter required";
+
+  if (!/[0-9]/.test(password))
+    return "At least one number required";
+
+  if (!/[^A-Za-z0-9]/.test(password))
+    return "At least one symbol required";
+
+  return null;
+};
 
   const handleReset = async () => {
+    const error = validatePassword(password);
+    if (error) {
+      toast.error(error);
+      return;
+    }
     try {
       setLoading(true);
 
@@ -21,7 +43,7 @@ const ResetPassword = () => {
       );
 
       toast.success(res.data.message);
-      navigate("/login");
+      navigate("/");
     } catch (err) {
       toast.error(err.response?.data?.message || "Error");
     } finally {
@@ -44,7 +66,7 @@ const ResetPassword = () => {
 
       <button
         onClick={handleReset}
-        className="btn mt-4"
+        className=" mt-4"
         disabled={loading}
       >
         {loading ? "Resetting..." : "Reset Password"}

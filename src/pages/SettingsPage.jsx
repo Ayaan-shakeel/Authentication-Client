@@ -20,6 +20,17 @@ const SettingsPage = () => {
           Update your account password securely
         </p>
       </div>
+      <div
+        onClick={() => navigate("/delete-account")}
+        className="bg-white p-6 rounded-2xl shadow cursor-pointer hover:shadow-lg transition"
+      >
+        <h2 className="text-lg font-semibold">
+          Delete Account
+        </h2>
+        <p className="text-sm text-gray-500">
+          Deleting your account deletes all your data in it completely 
+        </p>
+      </div>
 
     </div>
   );
