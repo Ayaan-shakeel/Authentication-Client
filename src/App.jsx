@@ -16,6 +16,7 @@ import Profile from './pages/Profile';
 import SettingsPage from './pages/SettingsPage';
 import ChangePassword from './pages/ChangePassword';
 import DeleteAccount from './pages/DeleteAccount';
+import Security from './pages/Security';
 
 const App = () => {
   return (
@@ -38,6 +39,7 @@ const App = () => {
 <Route path="/settings" element={<SettingsPage/>} />
 <Route path="/change-password" element={<ChangePassword/>} />
 <Route path="/delete-account" element={<DeleteAccount/>} />
+<Route path="/security" element={<Security/>} />
 <Route
   path="/profile" element={
     <ProtectedRoute>

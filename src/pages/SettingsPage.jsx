@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
+import DeleteAccount from "./DeleteAccount";
 
-const SettingsPage = () => {
+const SettingsPage = ({user}) => {
   const navigate = useNavigate();
 
   return (
@@ -20,6 +21,7 @@ const SettingsPage = () => {
           Update your account password securely
         </p>
       </div>
+      {/* Delete Account Card */}
       <div
         onClick={() => navigate("/delete-account")}
         className="bg-white p-6 rounded-2xl shadow cursor-pointer hover:shadow-lg transition"
@@ -29,6 +31,19 @@ const SettingsPage = () => {
         </h2>
         <p className="text-sm text-gray-500">
           Deleting your account deletes all your data in it completely 
+        </p>
+      </div>
+      {/* Security Settings Card */}
+
+<div
+        onClick={() => navigate("/security")}
+        className="bg-white p-6 rounded-2xl shadow cursor-pointer hover:shadow-lg transition"
+      >
+        <h2 className="text-lg font-semibold">
+          Security Settings
+        </h2>
+        <p className="text-sm text-gray-500">
+          Manage your account's security preferences
         </p>
       </div>
 
