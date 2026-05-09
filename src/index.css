@@ -11,3 +11,12 @@
   @apply w-full bg-blue-500 text-white p-3 rounded-xl
   hover:bg-blue-600 transition-all duration-200;
 }
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+}

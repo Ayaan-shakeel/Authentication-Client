@@ -6,6 +6,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom"; 
 import { GoogleLogin } from "@react-oauth/google";
+import ForgotPassword from './ForgotPassword';
 
 function DeleteAccount({user}) {
   const [showDelete, setShowDelete] = useState(false);
@@ -65,6 +66,7 @@ function DeleteAccount({user}) {
   >
     Delete Account
   </button>
+  
 </div>
 
 
@@ -139,9 +141,10 @@ function DeleteAccount({user}) {
     />
   </div>
 )}
+
       {/* Buttons */}
      <div className="flex justify-between gap-3">
-
+      
   <button
     onClick={() => setShowDelete(false)}
     className="w-full py-2 bg-gray-200 rounded-lg"
@@ -157,9 +160,18 @@ function DeleteAccount({user}) {
     >
       Delete Forever
     </button>
+    
   )}
+  
 
 </div>
+<div>
+  <p 
+  className='text-gray-700 pt-3 text-center underline text-sm cursor-pointer'
+  onClick={() => navigate("/forgot-password")}>Forgot Password</p>
+</div>
+
+
     </motion.div>
   </div>
 )}
