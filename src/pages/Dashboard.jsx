@@ -25,17 +25,39 @@ const Dashboard = () => {
 
   const navigate = useNavigate();
 
-  const handleLogout = () => {
+ const handleLogout = async () => {
+  try {
+
+    const token = localStorage.getItem("token");
+
+    await axios.post(
+      "https://authentication-server-1-oi3o.onrender.com/api/logout",
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
     localStorage.removeItem("token");
-    toast.success("Logout Successfully");
-    navigate("/");
-  };
+
+    toast.success("Logged out");
+
+    navigate("/login");
+
+  } catch (err) {
+
+    toast.error("Logout failed");
+
+  }
+};
 
   useEffect(() => {
     const token = localStorage.getItem("token");
 
     if (!token) {
-      navigate("/");
+      navigate("/login");
       return;
     }
 
@@ -56,7 +78,7 @@ const Dashboard = () => {
         toast.error("Session expired");
 
         localStorage.removeItem("token");
-        navigate("/");
+        navigate("/login");
       }
     };
 
@@ -197,7 +219,7 @@ const Dashboard = () => {
             className="
               fixed
               top-0 left-0
-              w-[260px]
+              w-65
               h-screen
               bg-gray-900
               text-white
@@ -274,7 +296,7 @@ const Dashboard = () => {
         )}
       </AnimatePresence>
 
-      {/* ================= MAIN CONTENT ================= */}
+      {/*MAIN CONTENT*/}
       <div className="flex-1 p-4 md:p-8 mt-20 md:mt-0">
 
         <motion.div
@@ -324,7 +346,7 @@ const Dashboard = () => {
             Welcome {user.name}
           </h1>
 
-          <p className="text-gray-500 break-words mb-6">
+          <p className="text-gray-500 wrap-break-word mb-6">
             {user.email}
           </p>
 

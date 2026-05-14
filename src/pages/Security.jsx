@@ -48,12 +48,37 @@ const Security = () => {
 
       toast.success("Logged out from all devices");
       fetchHistory();
-      navigate("/");
+      navigate("/login");
 
     } catch (err) {
       toast.error("Error logging out");
     }
   };
+  const logoutDevice = async (historyId) => {
+  try {
+
+    const token = localStorage.getItem("token");
+
+    await axios.post(
+      "https://authentication-server-1-oi3o.onrender.com/api/logout-device",
+      { historyId },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    toast.success("Device logged out");
+
+    fetchHistory();
+
+  } catch (err) {
+
+    toast.error("Failed");
+
+  }
+};
 
   return (
     <div className="min-h-screen bg-gray-100 p-4">
@@ -86,17 +111,29 @@ const Security = () => {
                   {new Date(item.time).toLocaleString()}
                 </p>
               </div>
-              {item.isActive === false ? (
-                <span className="text-red-500 text-xs">
-                  Not Active
-                </span>
-              ) :
-
-              (item.isActive && (
-                <span className="text-green-500 text-xs">
-                  Active
-                </span>
-              ))}
+              {item.isActive ? (
+                <div className="flex items-center gap-2">
+                  <span className="text-green-500 text-xs">Active</span>
+                  <button
+                    onClick={() => logoutDevice(item._id)}
+                    className="
+                      text-xs
+                      bg-red-100
+                      text-red-500
+                      px-3
+                      py-1
+                      rounded-lg
+                      hover:bg-red-200
+                      transition
+                    "
+                  >
+                    Logout
+                  </button>
+                </div>
+              ) : (
+                <span className="text-red-500 text-xs">Not Active</span>
+              )}
+              
             </motion.div>
           )))}
         </div>

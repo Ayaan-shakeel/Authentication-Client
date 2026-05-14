@@ -1,44 +1,122 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import { toast,ToastContainer } from 'react-toastify'
-const FrontPage = () => {
-    const navigate=useNavigate()
-    
-
-    const logOut=async(req,res)=>{
-        toast.success("Log out successfully")
-navigate("/")
-    }
+export default function PremiumSplashPage() {
   return (
-     <div className="min-h-screen bg-linear-to-br from-slate-900 via-gray-800 to-slate-950 text-white px-4 sm:px-6 lg:px-8">
-      <div className="mx-auto flex min-h-screen max-w-4xl items-center justify-center">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          className="w-full rounded-3xl border border-white/10 bg-white/10 p-6 text-center shadow-2xl backdrop-blur-md sm:p-8 md:p-10"
-        >
-          <h1 className="text-2xl font-bold leading-tight sm:text-3xl md:text-4xl lg:text-5xl">
-            Welcome to our Simple Authentication Page
-          </h1>
+    <div className="relative min-h-screen overflow-hidden bg-black text-white flex items-center justify-center px-6">
+      {/* Background Glow */}
+      <div className="absolute inset-0">
+        <div className="absolute -top-30-[-120px] w-96 h-96 bg-blue-500/30 blur-3xl rounded-full" />
+        <div className="absolute -bottom-37.5 -right-25 w-md h-112 bg-purple-500/30 blur-3xl rounded-full" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08),transparent_60%)]" />
+      </div>
 
-          <p className="mx-auto mt-4 max-w-2xl text-sm text-gray-200 sm:text-base md:text-lg">
-            You are successfully logged in. Click the button below if you want to securely log out.
-          </p>
-
-          <div className="mt-8">
-            <button
-              onClick={logOut}
-              className="w-full rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition duration-300 hover:scale-105 hover:bg-gray-200 focus:outline-none focus:ring-4 focus:ring-white/30 sm:w-auto sm:px-10 sm:text-base"
-            >
-              Logout
-            </button>
+      {/* Main Card */}
+      <div
+        className="
+          relative
+          z-10
+          w-full
+          max-w-xl
+          rounded-4xl
+          border border-white/10
+          bg-white/10
+          backdrop-blur-2xl
+          shadow-2xl
+          p-8 sm:p-12
+          text-center
+        "
+      >
+        {/* Logo */}
+        <div className="flex justify-center mb-8">
+          <div
+            className="
+              relative
+              w-28 h-28 sm:w-36 sm:h-36
+              rounded-4xl
+              bg-linear-to-br
+              from-blue-500
+              to-indigo-600
+              flex items-center justify-center
+              shadow-[0_0_60px_rgba(59,130,246,0.5)]
+              animate-pulse
+            "
+          >
+            {/* Replace this image with your logo */}
+            <img
+              src="src/assets/image.png"
+              alt="Logo"
+              className="w-20 h-20 sm:w-24 sm:h-24 object-contain"
+            />
           </div>
-        </motion.div>
+        </div>
+
+        {/* Heading */}
+        <h1 className="text-4xl sm:text-5xl font-black tracking-tight leading-tight">
+          Welcome to
+          <span className="block bg-linear-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mt-2">
+            Auth App
+          </span>
+        </h1>
+
+        {/* Subtitle */}
+        <p className="text-gray-300 mt-5 text-sm sm:text-base leading-relaxed max-w-md mx-auto">
+          Modern authentication experience with premium security,
+          lightning-fast access, and beautifully crafted UI.
+        </p>
+
+        {/* Features */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+            <h3 className="font-semibold text-blue-300">Secure</h3>
+            <p className="text-xs text-gray-400 mt-1">
+              JWT + OTP + Google Auth
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+            <h3 className="font-semibold text-purple-300">Modern</h3>
+            <p className="text-xs text-gray-400 mt-1">
+              Responsive premium UI/UX
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+            <h3 className="font-semibold text-pink-300">Protected</h3>
+            <p className="text-xs text-gray-400 mt-1">
+              Device & session security
+            </p>
+          </div>
+        </div>
+
+        {/* Button */}
+        <div className="mt-10">
+          <button
+            onClick={() => {
+              window.location.href = "/login";
+            }}
+            className="
+              w-full sm:w-auto
+              px-10 py-4
+              rounded-2xl
+              bg-linear-to-r
+              from-blue-500
+              to-indigo-600
+              font-semibold
+              text-white
+              shadow-xl
+              hover:scale-[1.03]
+              active:scale-[0.98]
+              transition-all
+              duration-300
+            "
+          >
+            Get Started
+          </button>
+        </div>
+
+        {/* Footer */}
+        <p className="text-xs text-gray-500 mt-8">
+          Designed for modern authentication experiences.
+        </p>
       </div>
     </div>
-  )
+  );
 }
-
-export default FrontPage

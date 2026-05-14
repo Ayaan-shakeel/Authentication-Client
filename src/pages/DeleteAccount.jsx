@@ -37,7 +37,7 @@ function DeleteAccount({user}) {
     toast.success("Account deleted");
 
     localStorage.removeItem("token");
-    navigate("/");
+    navigate("/login");
 
   } catch (err) {
     console.log("DELETE ERROR:", err.response?.data);
@@ -49,133 +49,348 @@ function DeleteAccount({user}) {
 
 
   return (
-    <div>
-        <div className="mt-8 border-t pt-6">
+    <div className="mt-10">
 
-  <h3 className="text-red-500 font-semibold flex items-center gap-2">
-    <AlertTriangle size={18} /> Danger Zone
-  </h3>
-
-  <p className="text-sm text-gray-500 mt-2">
-    Deleting your account is permanent. This action cannot be undone.
-  </p>
-
-  <button
-    onClick={() => setShowDelete(true)}
-    className="mt-4 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg"
+  {/* ================= DANGER CARD ================= */}
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    className="
+      bg-white
+      border border-red-100
+      rounded-3xl
+      p-5 sm:p-6
+      shadow-lg
+    "
   >
-    Delete Account
-  </button>
-  
-</div>
 
+    {/* Header */}
+    <div className="flex items-start gap-4">
 
-{showDelete && (
-  <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-
-    <motion.div
-      initial={{ scale: 0.8, opacity: 0 }}
-      animate={{ scale: 1, opacity: 1 }}
-      className="bg-white p-6 rounded-2xl shadow-xl w-[90%] max-w-md"
-    >
-      
-      {/* Header */}
-      <div className="flex items-center gap-2 text-red-500 mb-3">
-        <AlertTriangle />
-        <h2 className="text-lg font-bold">Delete Account</h2>
+      <div
+        className="
+          w-12 h-12
+          rounded-2xl
+          bg-red-100
+          flex items-center justify-center
+          shrink-0
+        "
+      >
+        <AlertTriangle className="text-red-500" size={24} />
       </div>
 
-      <p className="text-sm text-gray-600 mb-4">
-        This action is permanent. Your data will be erased forever.
-      </p>
+      <div>
+        <h3 className="text-xl font-bold text-gray-800">
+          Danger Zone
+        </h3>
 
-      {/* Conditional UI */}
-      {user?.password !== "google-auth" ? (
-  <>
-    <input
-      type="password"
-      placeholder="Enter your password"
-      className="input mb-4"
-      onChange={(e) => setDeletePassword(e.target.value)}
-    />
+        <p className="text-sm text-gray-500 mt-1 leading-relaxed">
+          Deleting your account is permanent and cannot be undone.
+          All your account data will be removed forever.
+        </p>
+      </div>
 
-    <p className="text-xs text-gray-400 mb-4">
-      We need your password to confirm this action.
-    </p>
-  </>
-) : (
-  <div className="mb-4">
-    <p className="text-sm text-gray-500 mb-2">
-      Confirm deletion with Google
-    </p>
-
-    <GoogleLogin
-      onSuccess={async (credentialResponse) => {
-        try {
-          const token = localStorage.getItem("token");
-
-          await axios.delete(
-            "https://authentication-server-1-oi3o.onrender.com/api/delete-account-google",
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-              data: {
-                credential: credentialResponse.credential,
-              },
-            }
-          );
-
-          toast.success("Account deleted");
-
-          localStorage.removeItem("token");
-          navigate("/");
-        } catch (err) {
-          console.log(err);
-          toast.error("Google delete failed");
-        }
-      }}
-      onError={() => {
-        toast.error("Google auth failed");
-      }}
-    />
-  </div>
-)}
-
-      {/* Buttons */}
-     <div className="flex justify-between gap-3">
-      
-  <button
-    onClick={() => setShowDelete(false)}
-    className="w-full py-2 bg-gray-200 rounded-lg"
-  >
-    Cancel
-  </button>
-
-  {/* NORMAL USER */}
-  {!user?.isGoogleUser && (
-    <button
-      onClick={handleDeleteAccount}
-      className="w-full py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg"
-    >
-      Delete Forever
-    </button>
-    
-  )}
-  
-
-</div>
-<div>
-  <p 
-  className='text-gray-700 pt-3 text-center underline text-sm cursor-pointer'
-  onClick={() => navigate("/forgot-password")}>Forgot Password</p>
-</div>
-
-
-    </motion.div>
-  </div>
-)}
     </div>
+
+    {/* Button */}
+    <button
+      onClick={() => setShowDelete(true)}
+      className="
+        mt-6
+        w-full sm:w-auto
+        bg-linear-to-r
+        from-red-500 to-rose-600
+        hover:from-red-600 hover:to-rose-700
+        text-white
+        px-6 py-3
+        rounded-2xl
+        font-semibold
+        shadow-lg
+        transition-all duration-300
+        active:scale-[0.98]
+      "
+    >
+      Delete Account
+    </button>
+
+  </motion.div>
+
+  {/* ================= MODAL ================= */}
+  {showDelete && (
+
+    <div
+      className="
+        fixed inset-0
+        bg-black/60 backdrop-blur-sm
+        flex items-center justify-center
+        z-50
+        p-4
+      "
+    >
+
+      <motion.div
+
+        initial={{ opacity: 0, scale: 0.9, y: 30 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+
+        className="
+          w-full max-w-md
+          bg-white
+          rounded-3xl
+          shadow-2xl
+          overflow-hidden
+        "
+      >
+
+        {/* Top Gradient */}
+        <div
+          className="
+            bg-linear-to-r
+            from-red-500 to-rose-600
+            px-6 py-5
+            text-white
+          "
+        >
+
+          <div className="flex items-center gap-3">
+
+            <div
+              className="
+                w-12 h-12
+                rounded-2xl
+                bg-white/20
+                flex items-center justify-center
+              "
+            >
+              <AlertTriangle size={24} />
+            </div>
+
+            <div>
+              <h2 className="text-xl font-bold">
+                Delete Account
+              </h2>
+
+              <p className="text-sm text-red-100">
+                This action cannot be reversed
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+        {/* Content */}
+        <div className="p-6">
+
+          <div
+            className="
+              bg-red-50
+              border border-red-100
+              rounded-2xl
+              p-4
+              mb-5
+            "
+          >
+
+            <p className="text-sm text-red-700 leading-relaxed">
+              Once deleted, your account, profile, and all associated
+              data will be permanently removed from our servers.
+            </p>
+
+          </div>
+
+          {/* NORMAL USER */}
+          {user?.password !== "google-auth" ? (
+
+            <>
+
+              <label className="text-sm font-medium text-gray-700">
+                Confirm your password
+              </label>
+
+              <input
+                type="password"
+                placeholder="Enter your password"
+                className="
+                  w-full
+                  mt-2
+                  bg-gray-50
+                  border border-gray-200
+                  rounded-2xl
+                  px-4 py-3
+                  outline-none
+                  focus:ring-2
+                  focus:ring-red-400
+                  transition
+                "
+                onChange={(e) =>
+                  setDeletePassword(e.target.value)
+                }
+              />
+
+              <p className="text-xs text-gray-400 mt-3">
+                We require your password to verify ownership of this account.
+              </p>
+
+            </>
+
+          ) : (
+
+            /* GOOGLE USER */
+            <div className="mt-2">
+
+              <div
+                className="
+                  flex items-start gap-3
+                  bg-yellow-50
+                  border border-yellow-100
+                  rounded-2xl
+                  p-4
+                  mb-5
+                "
+              >
+
+                <ShieldAlert
+                  className="text-yellow-600 shrink-0 mt-1"
+                  size={20}
+                />
+
+                <div>
+
+                  <p className="text-sm font-semibold text-yellow-700">
+                    Google Verification Required
+                  </p>
+
+                  <p className="text-xs text-yellow-600 mt-1">
+                    Re-login with Google to confirm deletion.
+                  </p>
+
+                </div>
+
+              </div>
+
+              <div className="flex justify-center overflow-hidden rounded-2xl">
+                
+                <GoogleLogin
+                  onSuccess={async (credentialResponse) => {
+                    try {
+
+                      const token =
+                        localStorage.getItem("token");
+
+                      await axios.delete(
+                        "https://authentication-server-1-oi3o.onrender.com/api/delete-account-google",
+                        {
+                          headers: {
+                            Authorization: `Bearer ${token}`,
+                          },
+                          data: {
+                            credential:
+                              credentialResponse.credential,
+                          },
+                        }
+                      );
+
+                      toast.success("Account deleted");
+
+                      localStorage.removeItem("token");
+
+                      navigate("/login");
+
+                    } catch (err) {
+
+                      console.log(err);
+
+                      toast.error(
+                        "Google delete failed"
+                      );
+
+                    }
+                  }}
+
+                  onError={() => {
+                    toast.error("Google auth failed");
+                  }}
+                />
+
+              </div>
+
+            </div>
+
+          )}
+
+          {/* Forgot Password */}
+          {!user?.isGoogleUser && (
+            <p
+              className="
+                text-center
+                text-sm
+                text-blue-500
+                hover:text-blue-600
+                mt-5
+                cursor-pointer
+                transition
+              "
+              onClick={() => navigate("/forgot-password")}
+            >
+              Forgot Password?
+            </p>
+          )}
+
+          {/* Buttons */}
+          <div className="flex flex-col sm:flex-row gap-3 mt-6">
+
+            <button
+              onClick={() => setShowDelete(false)}
+              className="
+                w-full
+                py-3
+                rounded-2xl
+                bg-gray-100
+                hover:bg-gray-200
+                text-gray-700
+                font-medium
+                transition
+              "
+            >
+              Cancel
+            </button>
+
+            {/* Normal User Delete */}
+            {!user?.isGoogleUser && (
+
+              <button
+                onClick={handleDeleteAccount}
+                className="
+                  w-full
+                  py-3
+                  rounded-2xl
+                  bg-linear-to-r
+                  from-red-500 to-rose-600
+                  hover:from-red-600 hover:to-rose-700
+                  text-white
+                  font-semibold
+                  shadow-lg
+                  transition-all duration-300
+                  active:scale-[0.98]
+                "
+              >
+                Delete Forever
+              </button>
+
+            )}
+
+          </div>
+
+        </div>
+
+      </motion.div>
+
+    </div>
+
+  )}
+
+</div>
   )
 }
 
