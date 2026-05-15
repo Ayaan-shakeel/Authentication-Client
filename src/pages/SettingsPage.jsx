@@ -33,7 +33,7 @@ const SettingsPage = ({user}) => {
           Deleting your account deletes all your data in it completely 
         </p>
       </div>
-      {/* Security Settings Card */}
+      {/* Security Settings Card
 
 <div
         onClick={() => navigate("/security")}
@@ -45,9 +45,9 @@ const SettingsPage = ({user}) => {
         <p className="text-sm text-gray-500">
           Manage your account's security preferences
         </p>
-      </div>
+      </div>*/}
 
-    </div>
+    </div> 
   );
 };
 

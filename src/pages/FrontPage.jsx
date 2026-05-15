@@ -40,11 +40,9 @@ export default function PremiumSplashPage() {
             "
           >
             {/* Replace this image with your logo */}
-            <img
-              src="src/assets/image.png"
-              alt="Logo"
-              className="w-20 h-20 sm:w-24 sm:h-24 object-contain"
-            />
+           <span className="text-white text-2xl font-bold">
+        A
+      </span>
           </div>
         </div>
 
