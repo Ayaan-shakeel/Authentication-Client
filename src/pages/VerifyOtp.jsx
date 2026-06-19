@@ -23,6 +23,9 @@ useEffect(() => {
   const email = location.state?.email;
 
  const handleVerify = async () => {
+  console.log("EMAIL:", email);
+  console.log("OTP:", otp);
+
 
   if (!otp) {
     return toast.error("Enter OTP");
