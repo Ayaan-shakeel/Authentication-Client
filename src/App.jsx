@@ -36,7 +36,7 @@ const App = () => {
     </ProtectedRoute>
   }
 />
-<Route path="/forgot-password" element={<AuthRedirect><ForgotPassword /></AuthRedirect>} />
+<Route path="/forgot-password" element={<ForgotPassword />} />
 <Route path="/reset-password/:token" element={<ResetPassword />} />
 <Route path="/settings" element={<ProtectedRoute><SettingsPage/></ProtectedRoute>} />
 <Route path="/change-password" element={<ProtectedRoute><ChangePassword/></ProtectedRoute>} />

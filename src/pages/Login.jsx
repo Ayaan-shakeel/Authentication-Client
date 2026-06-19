@@ -49,11 +49,12 @@ const Login = () => {
 
       localStorage.setItem("token", res.data.token);
       toast.success("Google Login Success");
+      
 
       navigate("/dashboard");
 
     } catch (err) {
-      console.log(err);
+      console.log(err.message);
       toast.error("Google login failed");
     }
   };
