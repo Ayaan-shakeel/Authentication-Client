@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import AuthCard from "../components/AuthCard";
+import {logo} from "../assets/otp-logo.png";
 
 const VerifyOtp = () => {
   const [otp, setOtp] = useState("");
@@ -88,7 +89,7 @@ const handleResend = async () => {
       "
     >
       <span className="text-3xl">
-        <img src="src/assets/otpLogo.png" alt="OTP LOGO" />
+        <img src={logo} alt="OTP LOGO" />
       </span>
     </div>
   </div>
