@@ -20,7 +20,9 @@ useEffect(() => {
     return () => clearInterval(interval);
   }
 }, [timer]);
-  const email = location.state?.email;
+  const email =
+  location.state?.email ||
+  localStorage.getItem("verifyEmail");
 
  const handleVerify = async () => {
   console.log("EMAIL:", email);
@@ -57,7 +59,7 @@ useEffect(() => {
     navigate("/dashboard");
 
   } catch (err) {
-
+console.log("verify full Err",err.response?.data?.message)
     toast.error(
       err.response?.data?.message || "Something went wrong"
     );
