@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import AuthCard from "../components/AuthCard";
-import logo from "../assets/otp-logo.png";
+import logo from "../assets/otpLogo.png";
 
 const VerifyOtp = () => {
   const [otp, setOtp] = useState("");
